@@ -1,9 +1,11 @@
-import studensModel from './models/studentsModel';
+import { studentsModel } from '../models/studentsModel.js';
 
 export class studentsController {
   static create (req, res) {
-    const { name, password, email } = req.body;
+    const { name, email, average, password, role } = req.body;
 
-    const data = studensModel.create(student);
+    const data = studentsModel.create({ name, email, average, password, role });
+
+    res.send({ data });
   }
 }

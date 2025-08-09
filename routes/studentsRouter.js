@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { studentsController } from '../models/studentsController';
+import { studentsController } from '../controllers/studentsController.js';
 
-const router = Router();
+export const studentsRouter = Router();
 
-router.post('/login', (req, res) => studentsController.create);
+studentsRouter.post('/login', studentsController.create);

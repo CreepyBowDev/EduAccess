@@ -1,6 +1,6 @@
 import express from 'express';
 import { config } from './config.js';
-import studentsRouter from './routes/studentsRouter.js';
+import { studentsRouter } from './routes/studentsRouter.js';
 
 const app = express();
 const port = config.PORT;
