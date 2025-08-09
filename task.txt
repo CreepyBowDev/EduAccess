@@ -1,0 +1,24 @@
+CHECKLIST DEL PROYECTO
+
+Frontend (EJS)
+- [ ] Login/Register (formularios, mensajes de error)
+- [ ] Vista docente para CRUD estudiantes
+- [ ] Vista estudiante para ver notas
+- [ ] Condicionales por rol (mostrar/ocultar botones)
+
+Backend
+- [ ] MVC armado (controllers, routes, models)
+- [ ] CRUD estudiantes (validaciones servidor)
+- [ ] Reglas de autenticación (middleware)
+- [ ] Opción A: sesiones + cookies
+- [ ] Opción B: JWT en cookie httpOnly (si usas API)
+- [ ] Hash de contraseñas (bcrypt)
+- [ ] Manejo de errores centralizado
+- [ ] Seeds iniciales (admin por defecto)
+
+Seguridad mínima
+- [ ] bcrypt para passwords
+- [ ] Rate limit en /login
+- [ ] Sanitizar y validar inputs (express-validator o similar)
+- [ ] CSRF (si usas sesiones + formularios)
+- [ ] Cookies httpOnly, secure, sameSite
