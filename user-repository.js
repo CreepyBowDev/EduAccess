@@ -1,6 +1,5 @@
 import { randomUUID } from 'node:crypto';
 import DbLocal from 'db-local';
-import bcrypt from 'bcrypt';
 
 const { Schema } = new DbLocal({ path: './db' });
 
@@ -14,15 +13,22 @@ const Student = Schema('Student', {
 });
 
 export class DbStudent {
-  static create ({ name, email, average, password, role }) {
-    const hashedPassowrd = bcrypt.hashSync(password, 10);
+  static async create ({ name, email, average, password }) {
     Student.create({
       _id: randomUUID(),
       name,
       email,
       average,
-      password: hashedPassowrd,
+      password,
       role: 'student'
     }).save();
+  }
+
+  static async update (id, patch) {
+    // Se pasa la referencia del objeto a "user"
+    const user = await Student.findOne(id);
+
+    // En base a la referencia dada, se actualizan las propiedades del objeto original y se guardan
+    user.update(patch).save();
   }
 }

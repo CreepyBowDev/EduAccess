@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const Student = z.object({
+  id: z.uuid().optional(),
   name: z.string().min(3, 'Nombre muy corto'),
   email: z.string().email('Email inválido'),
   average: z.number().max(100).min(0),
