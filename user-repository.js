@@ -8,7 +8,7 @@ const Student = Schema('Student', {
   _id: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
-  average: { type: String, required: true },
+  average: { type: Number, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true }
 });
