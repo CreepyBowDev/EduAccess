@@ -1,4 +1,4 @@
-import { DbStudent } from '../student-repository.js';
+import { DbStudent } from '../repositories/student-repository.js';
 import bcrypt from 'bcrypt';
 
 export class studentsModel {
