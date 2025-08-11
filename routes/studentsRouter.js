@@ -5,3 +5,4 @@ export const studentsRouter = Router();
 
 studentsRouter.post('/login', studentsController.create);
 studentsRouter.patch('/:id', studentsController.update);
+studentsRouter.delete('/:id', studentsController.remove);

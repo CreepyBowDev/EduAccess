@@ -13,7 +13,9 @@ const Student = Schema('Student', {
 });
 
 export class DbStudent {
-  static async create ({ name, email, average, password }) {
+  // Funcion para crear un nuevo registro en la base de datos
+  static create ({ name, email, average, password }) {
+    // Se crea el nuevo registro y se inserta
     Student.create({
       _id: randomUUID(),
       name,
@@ -24,11 +26,13 @@ export class DbStudent {
     }).save();
   }
 
-  static async update (id, patch) {
+  static update (id, patch) {
     // Se pasa la referencia del objeto a "user"
-    const user = await Student.findOne(id);
+    Student.findOne(id).update(patch).save();
+  }
 
-    // En base a la referencia dada, se actualizan las propiedades del objeto original y se guardan
-    user.update(patch).save();
+  static remove ({ id }) {
+    // Remueve el registro del estudiante indicado desde el id
+    Student.remove(user => user._id === id);
   }
 }
