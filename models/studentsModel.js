@@ -7,7 +7,7 @@ export class studentsModel {
     const hashedPassowrd = await bcrypt.hash(password, 10); // Linea para hashear la contraseña del usuario
     const data = await DbStudent.create({ name, email, average, password: hashedPassowrd }); // Llama al repositorio una vez insertado el nuevo registro
 
-    return data;
+    return { data };
   }
 
   static async update ({ id, name, email, average, password }) {
@@ -25,15 +25,15 @@ export class studentsModel {
     }
 
     // Llama al repositorio para actualizar el registro en base de datos
-    const data = DbStudent.update(id, patch);
+    const data = await DbStudent.update(id, patch);
 
-    return data;
+    return { data };
   }
 
   static async remove ({ id }) {
     // Llama al repositorio para remover el registro de un estudiante en la base de datos local
     const data = await DbStudent.remove({ id });
 
-    return data;
+    return { data };
   }
 }

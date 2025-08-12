@@ -14,8 +14,11 @@ const Teacher = Schema('Teacher', {
 });
 
 export class DbTeacher {
-  static create ({ name, email, subject, title, password }) {
-    Teacher.create({
+  // Funcion para crear un nuevo registro de un docente en la base de datos
+  static async create ({ name, email, subject, title, password }) {
+    // Se crea el nuevo registro y se inserta
+    // Se retorna un objeto con las propiedades creadas y sus valores
+    return await Teacher.create({
       _id: randomUUID(),
       name,
       email,
@@ -24,5 +27,24 @@ export class DbTeacher {
       password,
       role: 'teacher'
     }).save();
+  }
+
+  // Funcion para actualizar el registro de un docente en la base de datos
+
+  static async update (id, patch) {
+    // Se actualiza el registro del docente seleccionado por el id
+    // Retorna el objeto con las propiedades actualizada
+    return await Teacher
+      .findOne(id)
+      .update(patch)
+      .save();
+  }
+
+  // Funcion para remover/eliminar el registro de un docente en la base de datos
+  static async remove ({ id }) {
+    // Remueve el registro del docente indicado por el id
+    // Retorna un array con todos los objetos removidos dentro de la base de datos local
+    return await Teacher
+      .remove(user => user._id === id);
   }
 }

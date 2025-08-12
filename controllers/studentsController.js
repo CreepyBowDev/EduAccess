@@ -10,9 +10,9 @@ export class studentsController {
       return res.status(400).json({ errors: information.error.format() });
     }
 
-    const data = await studentsModel.create({ name, email, average, password });
+    const { data } = await studentsModel.create({ name, email, average, password });
 
-    res.send({ data });
+    res.send(data);
   }
 
   static async update (req, res) {
@@ -23,14 +23,14 @@ export class studentsController {
     if (!information.success) {
       return res.status(400).json({ errors: information.error.format() });
     }
-    const data = await studentsModel.update({ id, name, email, average, password });
+    const { data } = await studentsModel.update({ id, name, email, average, password });
 
-    res.send({ data });
+    res.send(data);
   }
 
   static async remove (req, res) {
     const { id } = req.params;
-    const data = await studentsModel.remove({ id });
+    const { data } = await studentsModel.remove({ id });
 
     res.send(data);
   }
