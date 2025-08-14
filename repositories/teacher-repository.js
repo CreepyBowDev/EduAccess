@@ -17,7 +17,7 @@ export class DbTeacher {
   // Funcion para crear un nuevo registro de un docente en la base de datos
   static async create ({ name, email, subject, title, password }) {
     // Se crea el nuevo registro y se inserta
-    // Se retorna un objeto con las propiedades creadas y sus valores
+    // Se retorna un objeto con las propiedades creadas
     return await Teacher.create({
       _id: randomUUID(),
       name,
