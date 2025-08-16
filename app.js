@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from './config.js';
 import { studentsRouter } from './routes/studentsRouter.js';
 import { teachersRouter } from './routes/teachersRouter.js';
-import { AppError } from './middlewares/appError.js';
+import { AppError } from './middlewares/AppError.js';
 
 const app = express();
 const port = config.PORT;

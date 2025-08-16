@@ -32,8 +32,6 @@ export class studentsModel {
 
   static async remove ({ id }) {
     // Llama al repositorio para remover el registro de un estudiante en la base de datos local
-    const data = await DbStudent.remove({ id });
-
-    return { data };
+    await DbStudent.remove({ id });
   }
 }
