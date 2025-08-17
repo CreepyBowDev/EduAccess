@@ -1,0 +1,86 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    /* Fondo */
+    --color-bg: #1a1c20;
+    /* Gris grafito oscuro */
+    --color-bg-gradient1: #2c5364;
+    /* Gris azulado oscuro */
+    --color-bg-gradient2: #3e4450;
+    /* Gris con matiz violáceo */
+
+    /* Colores principales */
+    --color-primary: #ff8a00;
+    /* Naranja moderno vibrante */
+    --color-secondary: #fcd757;
+    /* Amarillo suave con elegancia */
+
+    /* Texto */
+    --color-text-light: #f0f0f0;
+    /* Gris claro, legible sobre fondos oscuros */
+    --color-text-dark: #1a1a1a;
+    /* Gris oscuro para fondos claros */
+
+    /* Botones */
+    --color-btn-bg: #8ab4f8;
+    /* Azul claro para botones */
+    --color-btn-hover: #65a9f7;
+    /* Azul más intenso al hacer hover */
+    --color-btn-text: #ffffff;
+    /* Blanco puro para texto en botón */
+
+    /* Bordes y detalles */
+    --color-border: rgba(255, 255, 255, 0.15);
+    /* Borde sutil y elegante */
+    --color-shadow: rgba(0, 0, 0, 0.25);
+    /* Sombra profunda y suave */
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg);
+}
+
+.choices {
+    display: flex;
+    gap: 10px;
+
+}
+
+img {
+    aspect-ratio: 1 / 1;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card {
+    color: var(--color-text-light);
+    text-decoration: none;
+    background-color: var(--color-bg-gradient1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px;
+    border-color: var(--color-border);
+    border-radius: 15px;
+    width: 250px;
+    height: 250px;
+    gap: 20px;
+}
+
+.card:hover {
+    background-color: #2e4c5e;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}

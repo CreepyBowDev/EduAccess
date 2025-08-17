@@ -23,6 +23,10 @@ app.use('/login', (req, res) => {
   res.render('login');
 });
 
+app.use('/principal', (req, res) => {
+  res.render('index');
+});
+
 app.use('/students', studentsRouter);
 
 app.use('/teachers', teachersRouter);

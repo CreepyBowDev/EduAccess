@@ -7,32 +7,40 @@
 
 :root {
     /* Fondo */
-    --color-bg: #0f2027;
-    /* Azul muy oscuro */
-    --color-bg-gradient1: #203a43;
-    /* Azul petróleo */
-    --color-bg-gradient2: #2c5364;
-    /* Azul verdoso moderno */
+    --color-bg: #1a1c20;
+    /* Gris grafito oscuro */
+    --color-bg-gradient1: #2c5364;
+    /* Gris azulado oscuro */
+    --color-bg-gradient2: #3e4450;
+    /* Gris con matiz violáceo */
 
     /* Colores principales */
-    --color-primary: #4facfe;
-    /* Azul degradado llamativo */
-    --color-secondary: #00f2fe;
-    /* Cian brillante */
+    --color-primary: #ff8a00;
+    /* Naranja moderno vibrante */
+    --color-secondary: #fcd757;
+    /* Amarillo suave con elegancia */
 
     /* Texto */
-    --color-text-light: #f5f5f5;
+    --color-text-light: #f0f0f0;
+    /* Gris claro, legible sobre fondos oscuros */
     --color-text-dark: #1a1a1a;
+    /* Gris oscuro para fondos claros */
 
     /* Botones */
-    --color-btn-bg: #4facfe;
-    --color-btn-hover: #00f2fe;
+    --color-btn-bg: #8ab4f8;
+    /* Azul claro para botones */
+    --color-btn-hover: #65a9f7;
+    /* Azul más intenso al hacer hover */
     --color-btn-text: #ffffff;
+    /* Blanco puro para texto en botón */
 
     /* Bordes y detalles */
-    --color-border: rgba(255, 255, 255, 0.2);
-    --color-shadow: rgba(0, 0, 0, 0.3);
+    --color-border: rgba(255, 255, 255, 0.15);
+    /* Borde sutil y elegante */
+    --color-shadow: rgba(0, 0, 0, 0.25);
+    /* Sombra profunda y suave */
 }
+
 
 body {
     background-color: var(--color-bg);
@@ -43,8 +51,10 @@ body {
 }
 
 .container {
-    background-color: white;
-    border-color: var(--color-shadow);
+    font-family: 'Poppins', sans-serif;
+    background-color: #2c5364;
+    border-color: var(--color-border);
+    box-shadow: var(--color-shadow);
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -59,6 +69,8 @@ body {
 
 .textLogin {
     margin-top: 20px;
+    color: #f5f5f5;
+    font-weight: bold;
 }
 
 .record {
@@ -67,10 +79,17 @@ body {
     align-items: center;
 }
 
+label {
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
 input {
     width: 250px;
     height: 30px;
     border-radius: 5px;
+    border-color: var(--color-border);
+    box-shadow: var(--color-shadow);
 }
 
 .password {
@@ -82,10 +101,12 @@ input {
 button {
     background: var(--color-btn-bg);
     color: var(--color-btn-text);
+    border: none;
     border-radius: 10px;
     width: 150px;
     height: 40px;
     cursor: pointer;
+    outline: none;
 }
 
 button:hover {
