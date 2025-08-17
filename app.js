@@ -3,11 +3,25 @@ import { config } from './config.js';
 import { studentsRouter } from './routes/studentsRouter.js';
 import { teachersRouter } from './routes/teachersRouter.js';
 import { AppError } from './middlewares/AppError.js';
+import { fileURLToPath } from 'url';
+import path from 'node:path';
 
 const app = express();
 const port = config.PORT;
 
+// Necesario para obtener __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
+
+app.use('/login', (req, res) => {
+  res.render('login');
+});
 
 app.use('/students', studentsRouter);
 
