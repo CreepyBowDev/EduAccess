@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import DbLocal from 'db-local';
 import { AppError } from '../middlewares/AppError.js';
+import bcrypt from 'bcrypt';
 
 const { Schema } = new DbLocal({ path: './db' });
 
@@ -10,23 +11,26 @@ const Student = Schema('Student', {
   name: { type: String, required: true },
   email: { type: String, required: true },
   average: { type: Number, required: true },
+  record: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true }
 });
 
 export class DbStudent {
   // Funcion para crear un nuevo registro de un estudiante en la base de datos
-  static async create ({ name, email, average, password }) {
+  static async create ({ name, email, average, record, password }) {
     // Verificación para evitar que el email ya exista en otro usuario
-    const exist = await Student.findOne({ email });
 
-    if (exist) {
-      throw AppError.Conflict('Ya existe un usuario con este email', {
+    const existing = await Student.findOne({
+      $or: [{ email }, { record }]
+    });
+
+    if (existing) {
+      throw AppError.Conflict('Ya existe un usuario con ese email o registro', {
         code: 'CONFLICT',
-        details: 'Este email ya existe'
+        details: 'El email o el registro ya están en uso'
       });
     }
-
     // Se crea el nuevo registro y se inserta
     // Se retorna un objeto con las propiedades creadas y sus valores
 
@@ -36,9 +40,53 @@ export class DbStudent {
         name,
         email,
         average,
+        record,
         password,
         role: 'student'
       }).save();
+  }
+
+  // Funcion para loguear a un usuario
+  static async loginUser ({ record, password }) {
+    // Busca al usuario por su número de registro
+    const user = await Student.findOne({ record });
+
+    // Si el usuario no fue encontrado lanza el siguiente error
+    if (!user) {
+      throw AppError.NotFound('Este registro no existe', {
+        code: 'NOT_FOUND',
+        details: 'No se encontro un usuario con este registro'
+      });
+    }
+
+    // Compara la contraseña ingresada con la almacenada (hasheada)
+    const comparePassword = await bcrypt.compare(password, user.password);
+
+    // Si la contraseña es incorrecta lanza el siguiente error
+    if (!comparePassword) {
+      throw AppError.BadRequest('La contraseña es incorrecta', {
+        code: 'BAD_REQUEST',
+        details: `La contraseña [${password}] es incorrecta`
+      });
+    }
+
+    // Retorna el usuario autenticado
+    return user;
+  }
+
+  static async getAll () {
+    const user = await Student.find();
+    return user;
+  }
+
+  static async getById ({ id }) {
+    const user = await Student.findOne({ _id: id });
+    return user;
+  }
+
+  static async getByRecord ({ id }) {
+    const user = await Student.findOne({ record: id });
+    return user;
   }
 
   // Funcion para actualizar el registro de un estudiante en la base de datos
@@ -72,7 +120,7 @@ export class DbStudent {
   }
 
   // Funcion para reomover/eliminar el registro de un estudiante en la base de datos
-  static async remove ({ id }) {
+  static async removeId ({ id }) {
     const user = Student.findOne({ _id: id });
     if (!user) {
       throw AppError.NotFound('Registro no encontrado', {

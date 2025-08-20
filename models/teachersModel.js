@@ -1,11 +1,12 @@
 import { DbTeacher } from '../repositories/teacher-repository.js';
 import bcrypt from 'bcrypt';
+import { generateRecord } from '../utils/recordGenerator.js';
 
 export class teachersModel {
   static async create ({ name, email, subject, title, password }) {
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const data = await DbTeacher.create({ name, email, subject, title, password: hashedPassword });
+    const record = generateRecord('TEA');
+    const data = await DbTeacher.create({ name, email, subject, title, record, password: hashedPassword });
 
     return data;
   }

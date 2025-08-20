@@ -10,13 +10,14 @@ const Teacher = Schema('Teacher', {
   email: { type: String, required: true },
   subject: { type: String, required: true },
   title: { type: String, required: true },
+  record: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true }
 });
 
 export class DbTeacher {
   // Funcion para crear un nuevo registro de un docente en la base de datos
-  static async create ({ name, email, subject, title, password }) {
+  static async create ({ name, email, subject, title, record, password }) {
     // Se verifica que el email no se repita en un registro ya existente
     const exist = await Teacher.findOne({ email });
 
@@ -34,6 +35,7 @@ export class DbTeacher {
       email,
       subject,
       title,
+      record,
       password,
       role: 'teacher'
     }).save();

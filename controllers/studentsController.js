@@ -17,11 +17,61 @@ export class studentsController {
           });
       }
 
-      const { data } = await studentsModel.create({ name, email, average, password });
+      const data = await studentsModel.create({ name, email, average, password });
 
       return res.status(200).send(data);
     } catch (err) {
       return next(err);
+    }
+  }
+
+  static async loginUser (req, res, next) {
+    try {
+      const { record, password } = req.body;
+      const data = await studentsModel.loginUser({ record, password });
+
+      return res.status(200).send({
+        data,
+        message: 'Inicio de sesion exitoso'
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getAll (req, res, next) {
+    try {
+      const data = await studentsModel.getAll();
+      return res.status(200).send(data);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getById (req, res, next) {
+    try {
+      const { id } = req.params;
+      const information = studentsValidate.validatePartial({ id });
+      if (!information.success) {
+        throw AppError.BadRequest('Validacion fallida', {
+          code: information.code,
+          details: information.error?.format?.() ?? undefined
+        });
+      }
+      const data = await studentsModel.getById({ id });
+      return res.status(200).send(data);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getByRecord (req, res, next) {
+    try {
+      const { id } = req.params;
+      const data = await studentsModel.getByRecord({ id });
+      return res.status(200).send(data);
+    } catch (error) {
+      return next(error);
     }
   }
 
@@ -48,7 +98,7 @@ export class studentsController {
     }
   }
 
-  static async remove (req, res, next) {
+  static async removeId (req, res, next) {
     try {
       const { id } = req.params;
 
@@ -61,7 +111,7 @@ export class studentsController {
         });
       }
 
-      await studentsModel.remove({ id });
+      await studentsModel.removeId({ id });
 
       return res.send({ information: 'Usuario eliminado con exito' });
     } catch (error) {

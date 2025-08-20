@@ -5,8 +5,8 @@ import { AppError } from '../middlewares/AppError.js';
 export class teachersController {
   static async create (req, res, next) {
     try {
-      const { name, email, subject, title, password } = req.body;
-      const information = teachersValidations.validate({ name, email, subject, title, password });
+      const { name, email, subject, title, record, password } = req.body;
+      const information = teachersValidations.validate({ name, email, subject, title, record, password });
       if (!information.success) {
         throw AppError.BadRequest('Validacion fallida', {
           code: information.code,
