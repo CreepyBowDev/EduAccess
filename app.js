@@ -1,7 +1,9 @@
 import express from 'express';
 import { config } from './config.js';
+import { indexRouter } from './routes/indexRouter.js';
 import { studentsRouter } from './routes/studentsRouter.js';
 import { teachersRouter } from './routes/teachersRouter.js';
+import { loginRouter } from './routes/loginRouter.js';
 import { AppError } from './middlewares/AppError.js';
 import { fileURLToPath } from 'url';
 import path from 'node:path';
@@ -14,18 +16,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/auth', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 
-app.use('/login', (req, res) => {
-  res.render('login');
-});
+app.use('/', indexRouter);
 
-app.use('/principal', (req, res) => {
-  res.render('index');
-});
+app.use('/auth', loginRouter);
 
 app.use('/students', studentsRouter);
 

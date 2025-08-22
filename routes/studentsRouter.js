@@ -4,7 +4,6 @@ import { studentsController } from '../controllers/studentsController.js';
 export const studentsRouter = Router();
 
 studentsRouter.post('/register', studentsController.create);
-studentsRouter.post('/login', studentsController.loginUser);
 studentsRouter.get('/getAll', studentsController.getAll);
 studentsRouter.get('/:id', studentsController.getById);
 studentsRouter.get('/record/:id', studentsController.getByRecord);

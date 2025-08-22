@@ -25,20 +25,6 @@ export class studentsController {
     }
   }
 
-  static async loginUser (req, res, next) {
-    try {
-      const { record, password } = req.body;
-      const data = await studentsModel.loginUser({ record, password });
-
-      return res.status(200).send({
-        data,
-        message: 'Inicio de sesion exitoso'
-      });
-    } catch (error) {
-      return next(error);
-    }
-  }
-
   static async getAll (req, res, next) {
     try {
       const data = await studentsModel.getAll();

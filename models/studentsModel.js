@@ -12,12 +12,6 @@ export class studentsModel {
     return { data };
   }
 
-  static async loginUser ({ record, password }) {
-    const data = await DbStudent.loginUser({ record, password });
-
-    return data;
-  }
-
   static async getAll () {
     const data = await DbStudent.getAll();
     return data;
